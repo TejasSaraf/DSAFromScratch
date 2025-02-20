@@ -3,21 +3,26 @@ import java.util.ArrayList;
 
 public class SubsequenceOfSumK {
 
-    public static void subsequence(int i, int[] arr, int s, int sum, ArrayList<Integer> list, int n) {
+    public static boolean subsequence(int i, int[] arr, int s, int sum, ArrayList<Integer> list, int n) {
         if (i == n) {
             if (s == sum) {
                 System.out.println(list);
+                return true;
             }
-            return;
+            return false;
         }
 
         list.add(arr[i]);
         s += arr[i];
-        subsequence(i + 1, arr, s, sum, list, n);
+        if (subsequence(i + 1, arr, s, sum, list, n) == true) {
+            return true;
+        }
         list.remove(list.size() - 1);
         s -= arr[i];
-        subsequence(i + 1, arr, s, sum, list, n);
-
+        if (subsequence(i + 1, arr, s, sum, list, n) == true) {
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
